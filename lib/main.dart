@@ -2,7 +2,6 @@ import 'package:epicnfts/locator.dart';
 import 'package:epicnfts/utils/navigation.dart';
 import 'package:epicnfts/utils/router.dart';
 import 'package:epicnfts/views/create_wallet.dart';
-import 'package:epicnfts/views/home.dart';
 import 'package:epicnfts/vm/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -11,7 +10,9 @@ import 'package:provider/provider.dart';
 void main() async {
   injector();
   await dotenv.load(fileName: ".env");
-  runApp(MyApp());
+  runApp(
+    MultiProvider(providers: providers, child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,10 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
       navigatorKey: _navService.navigatorKey,
-      home: MultiProvider(
-        providers: providers,
-        child: CreateEthereumWallet(),
-      ),
+      home: CreateEthereumWallet(),
     );
   }
 }

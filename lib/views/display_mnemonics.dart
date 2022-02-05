@@ -26,8 +26,13 @@ class _DisplayMnemonicsState extends State<DisplayMnemonics> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Column(
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomText("Mnemonics to remember"),
+                CustomText(
+                  "Mnemonics to remember",
+                  fontSize: 20,
+                  textAlign: TextAlign.center,
+                ),
                 verticalSpaceMedium,
                 CustomText(
                   "You see this random texts you see below yeah you have to actually take them more seroiusly memorize them, if it means jotting them down and then them putting it in a secure safe or to put in a safety deposit box, take your pick and actually do it they are as important as your sweet sweet ethereum",
@@ -37,13 +42,24 @@ class _DisplayMnemonicsState extends State<DisplayMnemonics> {
               ],
             ),
             verticalSpaceLarge,
-            CustomText(
-              creationModel.mnemonic,
-              fontSize: 20,
-              textAlign: TextAlign.center,
+            Container(
+              height: 200,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Center(
+                child: CustomText(
+                  creationModel.mnemonic,
+                  fontSize: 20,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
+            verticalSpaceLarge,
+
             CustomButton(
-              onPressed: () => {},
+              onPressed: () => {creationModel.selectMnemonics()},
               textColor: Colors.white,
               buttonText: "Next",
               buttonStyle: buttonStyle(

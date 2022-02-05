@@ -1,5 +1,8 @@
 import 'package:epicnfts/utils/routes.dart';
 import 'package:epicnfts/views/create_wallet.dart';
+import 'package:epicnfts/views/display_mnemonics.dart';
+import 'package:epicnfts/views/home.dart';
+import 'package:epicnfts/views/memorize_mnemonics.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -11,6 +14,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(view: DisplayMnemonics(), routeName: settings.name);
     case Routes.MemorizeMnemonicsRoute:
       return _getPageRoute(view: MemorizeMnemonics(), routeName: settings.name);
+    case Routes.HomeRoute:
+      return _getPageRoute(view: Home(), routeName: settings.name);
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

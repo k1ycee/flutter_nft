@@ -7,13 +7,18 @@ class CreateWallet {
     return mnemonic;
   }
 
+  // bool validateMnemonic(String mnemonic) {
+  //   final isValid = bip39.validateMnemonic(mnemonic);
+  //   return isValid;
+  // }
+
   String generatePrivateKey(String mnemonics) {
     String privateKey = bip39.mnemonicToSeedHex(mnemonics);
     return privateKey;
   }
 
-  Future<String> createWallet(String privateKey) async {
-    Credentials wallet = EthPrivateKey.fromHex(privateKey);
+  Future<String> createWallet(String? privateKey) async {
+    Credentials wallet = EthPrivateKey.fromHex(privateKey!);
     final walletAddress = await wallet.extractAddress();
     return walletAddress.hex;
   }

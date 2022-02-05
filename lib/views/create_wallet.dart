@@ -40,10 +40,6 @@ class _CreateEthereumWalletState extends State<CreateEthereumWallet> {
             CustomButton(
               onPressed: () => {
                 creationModel.generateMnemonic(),
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => DisplayMnemonics()),
-                // ),
               },
               textColor: Colors.white,
               buttonText: "Get Started",
@@ -57,64 +53,3 @@ class _CreateEthereumWalletState extends State<CreateEthereumWallet> {
   }
 }
 
-class DisplayMnemonics extends StatelessWidget {
-  const DisplayMnemonics({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final creationModel = Provider.of<CreateWalletViewModel>(context, listen: false);
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                CustomText("Mnemonics to remember"),
-                verticalSpaceMedium,
-                CustomText(
-                  "You see this random texts you see below yeah you have to actually take them more seroiusly memorize them, if it means jotting them down and then them putting it in a secure safe or to put in a safety deposit box, take your pick and actually do it they are as important as your sweet sweet ethereum",
-                  fontSize: 14,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-            verticalSpaceLarge,
-            CustomText(
-              creationModel.mnemonic,
-              fontSize: 20,
-              textAlign: TextAlign.center,
-            ),
-            CustomButton(
-              onPressed: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MemorizeMnemonics()),
-                ),
-              },
-              textColor: Colors.white,
-              buttonText: "Next",
-              buttonStyle: buttonStyle(
-                buttonWidth: 150,
-                color: Colors.blue,
-                buttonHeight: 45,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MemorizeMnemonics extends StatelessWidget {
-  const MemorizeMnemonics({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final creationModel = Provider.of<CreateWalletViewModel>(context);
-    return Scaffold();
-  }
-}
