@@ -5,7 +5,7 @@ class CustomButton extends StatefulWidget {
   final String? buttonText;
   final VoidCallback? onPressed;
   final ButtonStyle? buttonStyle;
-  final Color? textColor;
+  final Color textColor;
   final double textFontSize;
 
   const CustomButton(
@@ -13,7 +13,7 @@ class CustomButton extends StatefulWidget {
       this.buttonText,
       this.onPressed,
       this.buttonStyle,
-      this.textColor,
+      this.textColor = Colors.white,
       this.textFontSize = 16})
       : super(key: key);
 
@@ -29,6 +29,7 @@ class _CustomButtonState extends State<CustomButton> {
         child: CustomText(
           widget.buttonText,
           fontSize: widget.textFontSize,
+          color: widget.textColor,
         ),
       ),
       style: widget.buttonStyle,

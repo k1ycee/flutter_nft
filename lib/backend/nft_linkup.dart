@@ -7,7 +7,7 @@ class NftContractLinkUp {
   late Client httpClient;
   late Web3Client ethClient;
 
-NftContractLinkUp() {
+  NftContractLinkUp() {
     httpClient = Client();
     ethClient = Web3Client(dotenv.env["ETH_CLIENT"]!, httpClient);
   }
@@ -32,7 +32,6 @@ NftContractLinkUp() {
     return contract;
   }
 
-
   Future<String> send(String functionName, List<dynamic> args) async {
     EthPrivateKey credential =
         EthPrivateKey.fromHex(dotenv.env["ETH_PRIVATEKEY"]!);
@@ -42,18 +41,22 @@ NftContractLinkUp() {
     final result = ethClient.sendTransaction(
       credential,
       Transaction.callContract(
-        contract: contract,
-        function: ethFunction,
-        parameters: args,
-        maxGas: 300000
-      ),
+          contract: contract,
+          function: ethFunction,
+          parameters: args,
+          maxGas: 300000),
       chainId: 4,
     );
     return result;
   }
 
-  Future wave(String message) async {
-    String result = await send("wave", [message]);
-    return result;
+  Future mintRandomNFT()async{
+    await send("makeAnEpicRandomNFT", []);
+  }
+
+  Future getWalletInfo(String? privateKey) async {
+    var credentials = EthPrivateKey.fromHex(dotenv.env["ETH_PRIVATEKEY"]!);
+    EtherAmount balance = await ethClient.getBalance(credentials.address);
+    return balance.getValueInUnit(EtherUnit.ether);
   }
 }

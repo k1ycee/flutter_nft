@@ -56,13 +56,6 @@ class _MemorizeMnemonicsState extends State<MemorizeMnemonics> {
                     itemCount: creationModel.reArrangedmnemonicList.length,
                     itemBuilder: (context, index) {
                       return MnemonicCard(
-                        // isSelected: selectedIndex == index ? Colors.green : Colors.amber,
-                        // onTap: () {
-                        //   setState(() {
-                        //     selectedIndex = index;
-                        //   });
-                        //   creationModel.select();
-                        // },
                         mnemonicKey:
                             creationModel.reArrangedmnemonicList[index],
                       );
@@ -71,7 +64,10 @@ class _MemorizeMnemonicsState extends State<MemorizeMnemonics> {
                 ),
                 // verticalSpaceMedium,
                 CustomButton(
-                  onPressed: () => {creationModel.createEthereumWallet()},
+                  onPressed: () => {
+                    creationModel.createEthereumWallet(),
+                    creationModel.getWalletInformation()
+                  },
                   textColor: Colors.white,
                   buttonText: "Next",
                   buttonStyle: buttonStyle(

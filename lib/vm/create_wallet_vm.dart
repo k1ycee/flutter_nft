@@ -1,3 +1,4 @@
+import 'package:epicnfts/backend/nft_linkup.dart';
 import 'package:epicnfts/backend/wallet_creation.dart';
 import 'package:epicnfts/locator.dart';
 import 'package:epicnfts/utils/list_shuffler.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 
 class CreateWalletViewModel extends ChangeNotifier {
   final walletUtil = CreateWallet();
+
+  final walletInfo = NftContractLinkUp();
   final navigate = inject<NavigationHandler>();
 
   String? _mnemonic = "";
@@ -23,6 +26,9 @@ class CreateWalletViewModel extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  String? _walletValue;
+  String get walletValue => _walletValue!;
 
   List<String> _mnemonics = [];
 
@@ -58,6 +64,14 @@ class CreateWalletViewModel extends ChangeNotifier {
     _privateKey = walletUtil.generatePrivateKey(_mnemonics.join().toString());
     _walletAddress = await walletUtil.createWallet(_privateKey);
     print(_walletAddress);
+    setLoading(false);
+    notifyListeners();
+  }
+
+  void getWalletInformation() async {
+    setLoading(true);
+    final walletValue = await walletInfo.getWalletInfo(_privateKey);
+    _walletValue = walletValue.toString();
     navigate.pushNamed(Routes.HomeRoute);
     setLoading(false);
     notifyListeners();
@@ -66,5 +80,10 @@ class CreateWalletViewModel extends ChangeNotifier {
   void select() {
     _isSelected = !_isSelected!;
     notifyListeners();
+  }
+
+  void mintRandNFT()async{
+    final res = await walletInfo.mintRandomNFT();
+    print(res);
   }
 }
